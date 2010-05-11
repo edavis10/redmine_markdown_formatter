@@ -25,6 +25,33 @@ class RedmineMarkdownFormatter::WikiFormatterTest < ActiveSupport::TestCase
                          '<a href="http://redmine.org" title="Redmine PM">Redmine</a>')
     end
 
+    should "add a table of contents when requested" do
+      source ="{{>toc}}
+# Title
+
+## Section
+
+### Sub Section ###
+
+Content
+
+## Section Two
+"
+      @response.body = @formatter.new(source).to_html
+
+      assert_select 'h1#Title', :text => 'Title'
+      assert_select 'h2#Section', :text => 'Section'
+      assert_select 'h3', :id => 'Sub+Section', :text => 'Sub Section'
+      assert_select 'h2', :id => 'Section+Two', :text => 'Section Two'
+      assert_select 'p', :text => 'Content'
+
+      assert_select 'ul.toc.right' do
+        assert_select 'li.heading1 a', :text => /Title/
+        assert_select 'li.heading2 a', :text => /Section/
+        assert_select 'li.heading3 a', :text => /Sub Section/
+        assert_select 'li.heading2 a', :text => /Section Two/
+      end
+    end
   end
 
   private
