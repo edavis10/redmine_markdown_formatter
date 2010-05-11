@@ -10,10 +10,7 @@ module RedmineMarkdownFormatter
 
     def to_html(&block)
       content = RDiscount.new(@text, :smart, :generate_toc)
-      html = content.to_html
-      if html.match(TOC_REGEX)
-        html = inline_toc(@text, html)
-      end
+      html = inline_toc(@text, content.to_html)
       html.gsub(/<a\s/, "<a class='external'") # Add the `external` class to every link
       html
     rescue => e
@@ -27,7 +24,7 @@ module RedmineMarkdownFormatter
     # 1. it produces invalid HTML with deep nests
     # 2. Redmine's css assumes a single ul list
     def inline_toc(source_text, html)
-      html.gsub!(TOC_REGEX) do
+      html.gsub(TOC_REGEX) do
         div_class = 'toc'
         div_class << ' right' if $1 == '>'
         div_class << ' left' if $1 == '<'
