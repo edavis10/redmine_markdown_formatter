@@ -114,18 +114,18 @@
 
         <h3><a name="4" class="wiki-page"></a>External links</h3>
 
-        <p>HTTP URLs and email addresses are automatically turned into clickable links:</p>
+        <p>HTTP URLs and email addresses are automatically turned into clickable links when surrounded by &lt; &gt;:</p>
 
 <pre>
-http://www.redmine.org, someone@foo.bar
+&lt;http://www.redmine.org&gt;, &lt;someone@foo.bar&gt;
 </pre>
 
         <p>displays: <a class="external" href="http://www.redmine.org">http://www.redmine.org</a>, <a href="mailto:someone@foo.bar" class="email">someone@foo.bar</a></p>
 
-        <p>If you want to display a specific text instead of the URL, you can use the standard textile syntax:</p>
+        <p>If you want to display a specific text instead of the URL, you can use the standard markdown syntax:</p>
 
 <pre>
-"Redmine web site":http://www.redmine.org
+[Redmine web site](http://www.redmine.org)
 </pre>
 
         <p>displays: <a href="http://www.redmine.org" class="external">Redmine web site</a></p>
@@ -134,16 +134,15 @@ http://www.redmine.org, someone@foo.bar
     <h2><a name="5" class="wiki-page"></a>Text formatting</h2>
 
 
-    <p>For things such as headlines, bold, tables, lists, Redmine supports Textile syntax.  See <a class="external" href="http://www.textism.com/tools/textile/">http://www.textism.com/tools/textile/</a> for information on using any of these features.  A few samples are included below, but the engine is capable of much more of that.</p>
+    <p>For things such as headlines, bold, tables, lists, Redmine supports Markdown syntax.  See <a class="external" href="http://daringfireball.net/projects/markdown/basics">http://daringfireball.net/projects/markdown/basics</a> for information on using any of these features.  A few samples are included below, but the engine is capable of much more of that.</p>
 
         <h3><a name="6" class="wiki-page"></a>Font style</h3>
 
 <pre>
-* *bold*
-* _italic_
-* _*bold italic*_
-* +underline+
-* -strike-through-
+* **bold**
+* *italic*
+* &lt;ins&gt;underline&lt;/ins&gt;
+* &lt;del&gt;strike-through&lt;/del&gt;
 </pre>
 
         <p>Display:</p>
@@ -159,39 +158,39 @@ http://www.redmine.org, someone@foo.bar
         <h3><a name="7" class="wiki-page"></a>Inline images</h3>
 
         <ul>
-            <li><strong>!image_url!</strong> displays an image located at image_url (textile syntax)</li>
+            <li><strong>![alt text](image_url)</strong> displays an image located at image_url (markdown syntax)</li>
             <li><strong>!>image_url!</strong> right floating image</li>
-            <li>If you have an image attached to your wiki page, it can be displayed inline using its filename: <strong>!attached_image.png!</strong></li>
+            <li>If you have an image attached to your wiki page, it can be displayed inline using its filename: <strong>![alt text](attached_image.png)</strong></li>
         </ul>
 
         <h3><a name="8" class="wiki-page"></a>Headings</h3>
 
 <pre>
-h1. Heading
-h2. Subheading
-h3. Subsubheading
+# Heading
+## Subheading
+### Subsubheading
+
+# Alternative Heading #
+## Alternative Subheading ##
+
+Another alternative heading
+=======	
+
+Another subheading
+------	
+
 </pre>
 
         <p>Redmine assigns an anchor to each of those headings thus you can link to them with "#Heading", "#Subheading" and so forth.</p>
 
 
-        <h3><a name="9" class="wiki-page"></a>Paragraphs</h3>
-
-<pre>
-p>. right aligned
-p=. centered
-</pre>
-
-        <p style="text-align:center;">This is centered paragraph.</p>
-
-
         <h3><a name="10" class="wiki-page"></a>Blockquotes</h3>
 
-        <p>Start the paragraph with <strong>bq.</strong></p>
+        <p>Start the paragraph with <strong>&gt; </strong></p>
 
 <pre>
-bq. Rails is a full-stack framework for developing database-backed web applications according to the Model-View-Control pattern.
-To go live, all you need to add is a database and a web server.
+&gt; Rails is a full-stack framework for developing database-backed web applications according to the Model-View-Control pattern.
+&gt; To go live, all you need to add is a database and a web server.
 </pre>
 
         <p>Display:</p>
