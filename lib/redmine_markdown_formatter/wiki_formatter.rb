@@ -36,14 +36,17 @@ module RedmineMarkdownFormatter
           _,
           heading_markers,
           heading_content,
-          _ = heading.match(/(#+)([\w -]*)(#*)/).to_a
+          _ = heading.match(/(#+)([^#]*)(#*)/).to_a
 
           level = heading_markers.length
 
-          # replaces non word caracters by +
+          # replaces non word caracters by +, excluding some allowed characters
+          #
+          # - . ( ) | / : ; ' " { } ? [ ] \ $
+          #
           #  (Markdown uses + instead of -)
           content = heading_content.strip
-          anchor = content.gsub(%r{[^\w\s\-]}, '').gsub(%r{\s+(\-+\s*)?}, '+')
+          anchor = content.gsub(%r{[^\w\s\-\.\(\)\|\/:;\'\"\{\}\?\[\]\\\$]}, '').gsub(%r{\s+(\-+\s*)?}, '+')
 
           out << "<li class=\"heading#{level}\"><a href=\"##{anchor}\">#{content}</a></li>\n"
         end
