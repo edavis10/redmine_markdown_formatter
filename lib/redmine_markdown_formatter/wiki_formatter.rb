@@ -30,7 +30,7 @@ module RedmineMarkdownFormatter
         div_class << ' left' if $1 == '<'
         out = "<ul class=\"#{div_class}\">"
 
-        source_text.scan(/[^\\]#.*/).each do |heading|
+        source_text.scan(/^\s?[^\\]#.*/).each do |heading|
           # 1+ '#'s followed by a few words/spaces/hyphens with some
           # optional '#'s
           _,
